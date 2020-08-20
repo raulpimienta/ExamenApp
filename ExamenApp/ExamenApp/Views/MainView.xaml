@@ -1,0 +1,200 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:d="http://xamarin.com/schemas/2014/forms/design"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:listview="clr-namespace:Syncfusion.ListView.XForms;assembly=Syncfusion.SfListView.XForms"
+             xmlns:rating="clr-namespace:Syncfusion.SfRating.XForms;assembly=Syncfusion.SfRating.XForms"
+             BackgroundColor="#363b47"
+             mc:Ignorable="d"
+             x:Class="ExamenApp.Views.MainView">
+    <ScrollView Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand">
+        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" Padding="15">
+            <SearchBar Text="{Binding Filter}" HeightRequest="50"  BackgroundColor="Transparent"  TextColor="White"   CancelButtonColor="White" ></SearchBar>
+
+            <ActivityIndicator Color="White"   HorizontalOptions="Center" VerticalOptions="Start" IsVisible="{Binding IsLoading}" IsRunning="{Binding IsLoading}" />
+            <Label Text="Top Rated" FontSize="14"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+            <listview:SfListView  x:Name="LvTopRated" ItemTapped="LvSelection_ItemTapped" SelectionBackgroundColor="Transparent"   IsVisible="{Binding IsVisibleList}" HeightRequest="250" Orientation="Horizontal"  SelectionMode="Single"  ItemsSource="{Binding ListTopRated}" VerticalOptions="StartAndExpand"    ItemSize="140"   >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Row="0"  Padding="0" Margin="0" CornerRadius="14" BorderColor="Transparent"   BackgroundColor="Transparent" HasShadow="False"   HorizontalOptions="FillAndExpand" >
+                                        <Frame.Content>
+                                            <Image  Source="{Binding ImageMovie}" Aspect="AspectFit" WidthRequest="150" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Image>
+                                        </Frame.Content>
+                                    </Frame>
+                                    <Label Grid.Row="1" Text="{Binding Title}" FontSize="10"  FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+                                    <rating:SfRating Grid.Row="2" IsEnabled="False" Value="{Binding Vote_average}" ItemCount="5" Precision="Exact" ItemSize="20"  VerticalOptions="End">
+                                        <rating:SfRating.RatingSettings>
+                                            <rating:SfRatingSettings RatedFill="Yellow" UnRatedFill="Gray"/>
+                                        </rating:SfRating.RatingSettings>
+                                    </rating:SfRating>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+
+            <Label Text="No se encontraron resultados" IsVisible="{Binding IsVisibleNotResultsTopRated}" FontSize="12"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+
+            <listview:SfListView x:Name="LvTopRatedFilter" ItemTapped="LvSelection_ItemTapped" SelectionBackgroundColor="Transparent" IsVisible="{Binding IsVisibleListFilter}" HeightRequest="250"  Orientation="Horizontal"     SelectionMode="Single"  ItemsSource="{Binding ListTopRatedFilter}" VerticalOptions="StartAndExpand"    ItemSize="140"   >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Row="0"  Padding="0" Margin="0" CornerRadius="14" BorderColor="Transparent"   BackgroundColor="Transparent" HasShadow="False"   HorizontalOptions="FillAndExpand" >
+                                        <Frame.Content>
+                                            <Image  Source="{Binding ImageMovie}" Aspect="AspectFit" WidthRequest="150" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Image>
+                                        </Frame.Content>
+                                    </Frame>
+                                    <Label Grid.Row="1" Text="{Binding Title}" FontSize="10"  FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+                                    <rating:SfRating Grid.Row="2" IsEnabled="False" Value="{Binding Vote_average}" ItemCount="5" Precision="Exact" ItemSize="20"  VerticalOptions="End">
+                                        <rating:SfRating.RatingSettings>
+                                            <rating:SfRatingSettings RatedFill="Yellow" UnRatedFill="Gray"/>
+                                        </rating:SfRating.RatingSettings>
+                                    </rating:SfRating>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+
+            <Label Text="Upcoming" FontSize="14"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+            <listview:SfListView x:Name="LvUpComing" ItemTapped="LvSelection_ItemTapped" SelectionBackgroundColor="Transparent" IsVisible="{Binding IsVisibleList}" HeightRequest="250" Orientation="Horizontal"   SelectionMode="Single"  ItemsSource="{Binding ListUpComing}" VerticalOptions="StartAndExpand"     ItemSize="140"   >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Row="0"  Padding="0" Margin="0" CornerRadius="14" BorderColor="Transparent"   BackgroundColor="Transparent" HasShadow="False"   HorizontalOptions="FillAndExpand" >
+                                        <Frame.Content>
+                                            <Image  Source="{Binding ImageMovie}" Aspect="AspectFit" WidthRequest="150" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Image>
+                                        </Frame.Content>
+                                    </Frame>
+                                    <Label Grid.Row="1" Text="{Binding Title}" FontSize="10"  FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+                                    <rating:SfRating Grid.Row="2" IsEnabled="False" Value="{Binding Vote_average}" ItemCount="5" Precision="Exact" ItemSize="20"  VerticalOptions="End">
+                                        <rating:SfRating.RatingSettings>
+                                            <rating:SfRatingSettings RatedFill="Yellow" UnRatedFill="Gray"/>
+                                        </rating:SfRating.RatingSettings>
+                                    </rating:SfRating>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+
+            <Label Text="No se encontraron resultados" IsVisible="{Binding IsVisibleNotResultsUpComing}" FontSize="12"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+
+            <listview:SfListView x:Name="LvUpComingFilter" ItemTapped="LvSelection_ItemTapped" SelectionBackgroundColor="Transparent" IsVisible="{Binding IsVisibleListFilter}" HeightRequest="250"  Orientation="Horizontal"  SelectionMode="Single"  ItemsSource="{Binding ListUpComingFilter}" VerticalOptions="StartAndExpand"    ItemSize="140"   >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Row="0"  Padding="0" Margin="0" CornerRadius="14" BorderColor="Transparent"   BackgroundColor="Transparent" HasShadow="False"   HorizontalOptions="FillAndExpand" >
+                                        <Frame.Content>
+                                            <Image  Source="{Binding ImageMovie}" Aspect="AspectFit" WidthRequest="150" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Image>
+                                        </Frame.Content>
+                                    </Frame>
+                                    <Label Grid.Row="1" Text="{Binding Title}" FontSize="10"  FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+                                    <rating:SfRating Grid.Row="2" IsEnabled="False" Value="{Binding Vote_average}" ItemCount="5" Precision="Exact" ItemSize="20"  VerticalOptions="End">
+                                        <rating:SfRating.RatingSettings>
+                                            <rating:SfRatingSettings RatedFill="Yellow" UnRatedFill="Gray"/>
+                                        </rating:SfRating.RatingSettings>
+                                    </rating:SfRating>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+
+            <Label Text="Popular" FontSize="14"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+            <listview:SfListView x:Name="LvPopular" ItemTapped="LvSelection_ItemTapped" SelectionBackgroundColor="Transparent" IsVisible="{Binding IsVisibleList}" HeightRequest="250" Orientation="Horizontal" SelectionMode="Single"  ItemsSource="{Binding ListPopular}" VerticalOptions="StartAndExpand"     ItemSize="140"   >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Row="0"  Padding="0" Margin="0" CornerRadius="14" BorderColor="Transparent"   BackgroundColor="Transparent" HasShadow="False"   HorizontalOptions="FillAndExpand" >
+                                        <Frame.Content>
+                                            <Image  Source="{Binding ImageMovie}" Aspect="AspectFit" WidthRequest="150" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Image>
+                                        </Frame.Content>
+                                    </Frame>
+                                    <Label Grid.Row="1" Text="{Binding Title}" FontSize="10"  FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+                                    <rating:SfRating Grid.Row="2" IsEnabled="False" Value="{Binding Vote_average}" ItemCount="5" Precision="Exact" ItemSize="20"  VerticalOptions="End">
+                                        <rating:SfRating.RatingSettings>
+                                            <rating:SfRatingSettings RatedFill="Yellow" UnRatedFill="Gray"/>
+                                        </rating:SfRating.RatingSettings>
+                                    </rating:SfRating>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+
+            <Label Text="No se encontraron resultados" IsVisible="{Binding IsVisibleNotResultsPopular}" FontSize="12"  HorizontalTextAlignment="Start" VerticalTextAlignment="Center" FontAttributes="Bold" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+
+            <listview:SfListView x:Name="LvPopularFilter" ItemTapped="LvSelection_ItemTapped" SelectionBackgroundColor="Transparent" IsVisible="{Binding IsVisibleListFilter}" HeightRequest="250"  Orientation="Horizontal" SelectionMode="Single"  ItemsSource="{Binding ListPopularFilter}" VerticalOptions="StartAndExpand"    ItemSize="140"   >
+                <listview:SfListView.ItemTemplate>
+                    <DataTemplate>
+                        <ViewCell>
+                            <ViewCell.View>
+                                <Grid>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="Auto" />
+                                    </Grid.RowDefinitions>
+                                    <Frame Grid.Row="0"  Padding="0" Margin="0" CornerRadius="14" BorderColor="Transparent"   BackgroundColor="Transparent" HasShadow="False"   HorizontalOptions="FillAndExpand" >
+                                        <Frame.Content>
+                                            <Image  Source="{Binding ImageMovie}" Aspect="AspectFit" WidthRequest="150" HeightRequest="150" HorizontalOptions="CenterAndExpand" VerticalOptions="CenterAndExpand"></Image>
+                                        </Frame.Content>
+                                    </Frame>
+                                    <Label Grid.Row="1" Text="{Binding Title}" FontSize="10"  FontAttributes="Bold" HorizontalTextAlignment="Start" VerticalTextAlignment="Center" TextColor="White" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" ></Label>
+                                    <rating:SfRating Grid.Row="2" IsEnabled="False" Value="{Binding Vote_average}" ItemCount="5" Precision="Exact" ItemSize="20"  VerticalOptions="End">
+                                        <rating:SfRating.RatingSettings>
+                                            <rating:SfRatingSettings RatedFill="Yellow" UnRatedFill="Gray"/>
+                                        </rating:SfRating.RatingSettings>
+                                    </rating:SfRating>
+                                </Grid>
+                            </ViewCell.View>
+                        </ViewCell>
+                    </DataTemplate>
+                </listview:SfListView.ItemTemplate>
+            </listview:SfListView>
+        </StackLayout>
+    </ScrollView>
+</ContentPage>
